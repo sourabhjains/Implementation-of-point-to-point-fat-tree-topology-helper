@@ -21,6 +21,7 @@
 #ifndef POINT_TO_POINT_FAT_TREE_HELPER_H
 #define POINT_TO_POINT_FAT_TREE_HELPER_H
 
+#include <vector>
 #include <string>
 #include "point-to-point-helper.h"
 #include "ipv4-address-helper.h"
@@ -37,8 +38,56 @@ namespace ns3 {
  * \brief A helper to make it easier to create a Fat-Tree topology
  * with p2p links
  */
-class PointToPointDumbbellHelper
+class PointToPointFatTreeHelper
 {
+public:
+  /**
+   * Create a PointToPointFatTreeHelper in order to easily create
+   * Fat-Tree Topology using p2p links
+   */
+   
+   PointToPointDumbbellHelper (uint32_t nCore,
+                               uint32_t nAggregator,
+                               uint32_t nEdgeNode,
+                               PointToPointHelper coreAggregatorHelper,
+                               PointToPointHelper aggregatorEdgeNodeHelper);
+
+  ~PointToPointDumbbellHelper ();
+
+public:
+
+  Ptr<Node> GetCore (uint32_t i) const;
+  
+  Ptr<Node> GetAggregator (uint32_t i) const;
+  
+  ptr<Node> GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const;
+  
+  Ipv4Address GetCoreIpv4Address (uint32_t i) const;
+  
+  Ipv4Address GetAggregatorIpv4Address (uint32_t i) const;
+  
+  Ipv4Address GetEdgeNodeIpv4Address (uint32_t aggregatorNodeIndex, uint32_t i) const;
+  
+  uint32_t coreCount () const;
+  
+  uint32_t aggregatorCout () const;
+  
+  uint32_t aggregatorEdgeNodeCount () const;
+  
+  void    InstallStack (InternetStackHelper stack);
+  
+  void      AssignIpv4Addresses (// yet to decide
+                                );
+  
+private:
+  NodeContainer m_nCore;
+  NetDeviceContainer m_nCoreDevice;
+  NodeContainer m_nAggregator;
+  NetDeviceConstainer m_nAggregatorDevice;
+  vector <NodeContainer> edge;
+  
+                                
+   
 }
 
 
