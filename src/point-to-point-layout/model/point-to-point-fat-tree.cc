@@ -37,5 +37,52 @@ namespace ns3 {
 
 NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
 
+  PointToPointFatTreeHelper::PointToPointFatTreeHelper (uint32_t nCore,
+                               uint32_t nAggregator,
+                               uint32_t nEdgeNode,
+                               PointToPointHelper coreAggregatorHelper,
+                               PointToPointHelper aggregatorEdgeNodeHelper)
+  {
+    
+  }
+  
+  PointToPointFatTreeHelper::~PointToPointFatTreeHelper()
+  {
+  }
+  
+  Ptr<Node> PointToPointFatTreeHelper::GetCore (uint32_t i) const
+  {
+  
+  }
+  
+  Ptr<Node> PointToPointFatTreeHelper::GetAggregator (uint32_t i) const
+  {
+  
+  }
+  
+  ptr<Node> PointToPointFatTreeHelper::GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const
+  {
+  
+  }
+  
+  Ipv4Address PointToPointFatTreeHelper::GetCoreIpv4Address (uint32_t i) const
+  {
+  
+  }
+  
+  Ipv4Address PointToPointFatTreeHelper::GetAggregatorIpv4Address (uint32_t i) const
+  {
+  
+  }
+  
+  Ipv4Address PointToPointFatTreeHelper::GetEdgeNodeIpv4Address (uint32_t aggregatorNodeIndex, uint32_t i) const
+  {
+  
+  }
+  
+  
+  
+  
+
 
 } // namespace ns3

@@ -46,13 +46,13 @@ public:
    * Fat-Tree Topology using p2p links
    */
    
-   PointToPointDumbbellHelper (uint32_t nCore,
+   PointToPointFatTreeHelper (uint32_t nCore,
                                uint32_t nAggregator,
                                uint32_t nEdgeNode,
                                PointToPointHelper coreAggregatorHelper,
                                PointToPointHelper aggregatorEdgeNodeHelper);
 
-  ~PointToPointDumbbellHelper ();
+  ~PointToPointFatTreeHelper ();
 
 public:
 
