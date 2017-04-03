@@ -60,7 +60,7 @@ public:
   
   Ptr<Node> GetAggregator (uint32_t i) const;
   
-  ptr<Node> GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const;
+  Ptr<Node> GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const;
   
   Ipv4Address GetCoreIpv4Address (uint32_t i) const;
   
@@ -83,24 +83,24 @@ private:
 
   NodeContainer                          m_nCore;
   NodeContainer                          m_nAggregator;
-  vector <NodeContainer>                 m_edge;
+  std::vector <NodeContainer>            m_edge;
   
-  std::vector <NetDeviceContainer>       m_coreDevices;
+  std::vector <NetDeviceContainer>       m_coreDevicesToAggregator;
   std::vector <NetDeviceContainer>       m_aggregatorToCoreDevices;
-  std::vector <NetDeviceContainer>       m_aggregatorToEdgeDevices
+  std::vector <NetDeviceContainer>       m_aggregatorToEdgeDevices;
   std::vector <NetDeviceContainer>       m_edgeDevice;
   
   std::vector <Ipv4InterfaceContainer>   m_coreInterfaces;
   std::vector <Ipv4InterfaceContainer>   m_aggregatorToCoreInterfaces;
-  std::vector <Ipv4InterfaceContainer>   m_aggregatorToEdgeInterfaces
+  std::vector <Ipv4InterfaceContainer>   m_aggregatorToEdgeInterfaces;
   std::vector <Ipv4InterfaceContainer>   m_edgeInterface;
   
   std::vector <Ipv6InterfaceContainer>   m_coreInterfaces6;
   std::vector <Ipv6InterfaceContainer>   m_aggregatorToCoreInterfaces6;
-  std::vector <Ipv6InterfaceContainer>   m_aggregatorToEdgeInterfaces6
+  std::vector <Ipv6InterfaceContainer>   m_aggregatorToEdgeInterfaces6;
   std::vector <Ipv6InterfaceContainer>   m_edgeInterfaces6;
 
-}
+};
 
 
 } // namespace ns3

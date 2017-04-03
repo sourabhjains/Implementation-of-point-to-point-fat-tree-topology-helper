@@ -43,6 +43,25 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
                                PointToPointHelper coreAggregatorHelper,
                                PointToPointHelper aggregatorEdgeNodeHelper)
   {
+  
+    m_nCore.Create(nCore);
+    m_nAggregator.Create(nAggregator);
+
+    for(int i = 0; i < nAggregator; i++)
+    {
+        NodeContainer edgeNodes;
+        NetDeviceContainer aggregatorDevices, edgeDevices;
+        edgeNodes.Create (nEdgeNode);
+        for(int j = 0; j < nEdgeNode; j++)
+        {
+          NetDeviceContainer c1 = aggregatorEdgeNodeHelper.Install (m_nAggregator.Get (i),
+                                                                       edgeNodes.Get (j));
+          aggregatorDevices.add (c1.Get (0));
+          edgeDevices.add (c1.Get (1));
+        }
+        m_aggregatorToEdgeDevices.push_back (aggregatorDevices);
+        m_coreDevicesToAggregator.push_back (edgeDevices);
+    }
     
   }
   
@@ -60,7 +79,7 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
   
   }
   
-  ptr<Node> PointToPointFatTreeHelper::GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const
+  Ptr<Node> PointToPointFatTreeHelper::GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const
   {
   
   }
