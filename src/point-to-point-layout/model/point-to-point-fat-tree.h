@@ -80,14 +80,26 @@ public:
                                 );
   
 private:
-  NodeContainer m_nCore;
-  NetDeviceContainer m_nCoreDevice;
-  NodeContainer m_nAggregator;
-  NetDeviceConstainer m_nAggregatorDevice;
-  vector <NodeContainer> edge;
+
+  NodeContainer                          m_nCore;
+  NodeContainer                          m_nAggregator;
+  vector <NodeContainer>                 m_edge;
   
-                                
-   
+  std::vector <NetDeviceContainer>       m_coreDevices;
+  std::vector <NetDeviceContainer>       m_aggregatorToCoreDevices;
+  std::vector <NetDeviceContainer>       m_aggregatorToEdgeDevices
+  std::vector <NetDeviceContainer>       m_edgeDevice;
+  
+  std::vector <Ipv4InterfaceContainer>   m_coreInterfaces;
+  std::vector <Ipv4InterfaceContainer>   m_aggregatorToCoreInterfaces;
+  std::vector <Ipv4InterfaceContainer>   m_aggregatorToEdgeInterfaces
+  std::vector <Ipv4InterfaceContainer>   m_edgeInterface;
+  
+  std::vector <Ipv6InterfaceContainer>   m_coreInterfaces6;
+  std::vector <Ipv6InterfaceContainer>   m_aggregatorToCoreInterfaces6;
+  std::vector <Ipv6InterfaceContainer>   m_aggregatorToEdgeInterfaces6
+  std::vector <Ipv6InterfaceContainer>   m_edgeInterfaces6;
+
 }
 
 
