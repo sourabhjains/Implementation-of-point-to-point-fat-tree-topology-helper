@@ -104,17 +104,17 @@ PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
 
   Ptr<Node> PointToPointFatTreeHelper::GetCore (uint32_t i) const
   {
-  
+    return m_nCoreGet (i);
   }
   
   Ptr<Node> PointToPointFatTreeHelper::GetAggregator (uint32_t i) const
   {
-  
+    return m_nAggregator.Get (i);
   }
   
   Ptr<Node> PointToPointFatTreeHelper::GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const
   {
-  
+    m_edge[aggregatorNodeIndex].Get (i);
   }
   
   Ipv4Address PointToPointFatTreeHelper::GetCoreIpv4Address (uint32_t i) const
@@ -132,9 +132,18 @@ PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
   
   }
   
-  
-  
-  
+  uint32_t  CoreCount () const
+  {
+    return m_nCore.GetN ();
+  }
 
+  uint32_t  AggregateCount () const
+  {
+    return m_nAggregator.GetN ();
+  }
 
+  uint32_t aggregatorEdgeNodeCount () const
+  {
+    return m_edge[0].GetN ();
+  }
 } // namespace ns3
