@@ -43,7 +43,6 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
                                PointToPointHelper coreAggregatorHelper,
                                PointToPointHelper aggregatorEdgeNodeHelper)
   {
-  
     m_nCore.Create(nCore);
     m_nAggregator.Create(nAggregator);
 
@@ -63,6 +62,27 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
         m_coreDevicesToAggregator.push_back (edgeDevices);
     }
     
+    for(int i = 0; i < nCore; i++)
+    {
+      NetDeviceContainer coreDevices;
+      m_coreDevicesToAggregator.push_back (coreDevices);
+    }
+    
+    for(int i = 0; i < nAggregator; i++)
+    {
+      NetDeviceContainer aggregatorDevices;
+      m_aggregatorToCoreDevices.push_back (aggregatorDevices);
+    }
+    
+    for(int i = 0; i < nCore; i++)
+    {
+      for(int j = 0; j < nAggregator; j++)
+      {
+        NetDeviceContainer c1 = coreAggregatorHelper.install (m_nCore.get(i), m_nAggregator(j));
+        m_coreDevicesToAggregator[i].add (c1.get (0));
+        m_aggregatorToCoreDevices[j].add (c1.get (1));
+      }
+    }
   }
   
   PointToPointFatTreeHelper::~PointToPointFatTreeHelper()
