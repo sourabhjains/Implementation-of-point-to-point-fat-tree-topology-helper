@@ -112,7 +112,7 @@ void AssignIpv4Addresses (Ipv4AddressHelper coreToAggregatorIp,
     {
       NetDeviceContainer ndc;
       ndc.Add (m_nAggregator.Get (i));
-      ndc.Add (m_crossSourceDevices[i].Get (j));
+      ndc.Add (m_edge[i].Get (j));
       Ipv4InterfaceContainer ifc = aggregatorToEdgeIp.Assign (ndc);
       aggregatorToEdgeInterfaces.Add (ifc.Get (0));
       edgeInterfaces.Add (ifc.Get (0));
@@ -121,6 +121,28 @@ void AssignIpv4Addresses (Ipv4AddressHelper coreToAggregatorIp,
     m_aggregatorToEdgeInterfaces.push_back (aggregatorToEdgeInterfaces);
     m_edgeInterfaces.push_back (edgeInterfacesss);
   }
+  
+  for(int i = 0; i < CoreCount (); i++)
+  {
+    Ipv4InterfaceContainer coreInterfaces;
+    m_coreInterfaces.push_back (coreInterfaces);
+  }
+  
+  for(int i = 0; i < AggregateCount; i++)
+  {
+    Ipv4InterfaceContainer aggregatorToCoreInterfaces;
+    m_aggregatorToCoreInterfaces.push_back (aggregatorToCoreInterfaces);
+  }
+  for(int i = 0; i < CoreCount (); i++)
+  {
+    for(int j = 0; j < AggregateCount (); j++)
+    {
+    
+    }
+  }
+  
+  
+  
 }
 
   Ptr<Node> PointToPointFatTreeHelper::GetCore (uint32_t i) const
