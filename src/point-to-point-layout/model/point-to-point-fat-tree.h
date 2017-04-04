@@ -47,17 +47,14 @@ public:
    */
    
    PointToPointFatTreeHelper (uint32_t nCore,
-                               uint32_t nAggregator,
-                               uint32_t nEdgeNode,
-                               PointToPointHelper coreAggregatorHelper,
-                               PointToPointHelper aggregatorEdgeNodeHelper);
+                              uint32_t nAggregator,
+                              uint32_t nEdgeNode,
+                              PointToPointHelper coreAggregatorHelper,
+                              PointToPointHelper aggregatorEdgeNodeHelper);
 
   ~PointToPointFatTreeHelper ();
 
 public:
-
-
-  void PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
 
   Ptr<Node> GetCore (uint32_t i) const;
   
@@ -65,32 +62,30 @@ public:
   
   Ptr<Node> GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const;
   
-  Ipv4Address GetCoreIpv4Address (uint32_t i) const;
+  Ipv4Address GetCoreToAggregatorIpv4Address (uint32_t coreIndex, uint32_t aggregatorIndex) const;
   
-  Ipv4Address GetAggregatorIpv4Address (uint32_t i) const;
+  Ipv4Address GetAggregatorToCoreIpv4Address (uint32_t aggregatorNodeIndex, uint32_t i) const;
   
-  Ipv4Address GetEdgeNodeIpv4Address (uint32_t aggregatorNodeIndex, uint32_t i) const;
+  Ipv4Address GetAggregatorToEdgeIpv4Address (uint32_t aggregatorIndex, uint32_t edgeIndex) const;
   
-  uint32_t coreCount () const;
+  Ipv4Address GetEdgeToAggregatorIpv4Address (uint32_t coreIndex, uint32_t aggregatorNodeIndex) const;
   
-  uint32_t aggregatorCout () const;
+  uint32_t CoreCount () const;
   
-  uint32_t aggregatorEdgeNodeCount () const;
+  uint32_t AggregatorCount () const;
+  
+  uint32_t AggregatorEdgeNodeCount () const;
   
   void    InstallStack (InternetStackHelper stack);
   
-  void      AssignIpv4Addresses (Ipv4AddressHelper coreIp,
-                                 Ipv4AddressHelper aggregatorToCoreIp,
-                                 Ipv4AddressHelper aggregatorToEdgeIp
-                                 Ipv4AddressHelper edgeIp);
-  
-private:
-
+  void      AssignIpv4Addresses (Ipv4AddressHelper coreToAggregatorIp,
+                                 Ipv4AddressHelper aggregatorToEdgeIp);
+                                 
   NodeContainer                          m_nCore;
   NodeContainer                          m_nAggregator;
   std::vector <NodeContainer>            m_edge;
   
-  std::vector <NetDeviceContainer>       m_coreDevicesToAggregator;
+  std::vector <NetDeviceContainer>       m_coreToAggregatorDevices;
   std::vector <NetDeviceContainer>       m_aggregatorToCoreDevices;
   std::vector <NetDeviceContainer>       m_aggregatorToEdgeDevices;
   std::vector <NetDeviceContainer>       m_edgeDevice;
@@ -98,14 +93,12 @@ private:
   std::vector <Ipv4InterfaceContainer>   m_coreInterfaces;
   std::vector <Ipv4InterfaceContainer>   m_aggregatorToCoreInterfaces;
   std::vector <Ipv4InterfaceContainer>   m_aggregatorToEdgeInterfaces;
-  std::vector <Ipv4InterfaceContainer>   m_edgeInterface;
+  std::vector <Ipv4InterfaceContainer>   m_edgeInterfaces;
   
   std::vector <Ipv6InterfaceContainer>   m_coreInterfaces6;
   std::vector <Ipv6InterfaceContainer>   m_aggregatorToCoreInterfaces6;
   std::vector <Ipv6InterfaceContainer>   m_aggregatorToEdgeInterfaces6;
   std::vector <Ipv6InterfaceContainer>   m_edgeInterfaces6;
-  
-  std::vector <Ipv4AddressHelper> 
 
 };
 
