@@ -79,8 +79,10 @@ public:
   
   void    InstallStack (InternetStackHelper stack);
   
-  void      AssignIpv4Addresses (// yet to decide
-                                );
+  void      AssignIpv4Addresses (Ipv4AddressHelper coreIp,
+                                 Ipv4AddressHelper aggregatorToCoreIp,
+                                 Ipv4AddressHelper aggregatorToEdgeIp
+                                 Ipv4AddressHelper edgeIp);
   
 private:
 
@@ -102,6 +104,8 @@ private:
   std::vector <Ipv6InterfaceContainer>   m_aggregatorToCoreInterfaces6;
   std::vector <Ipv6InterfaceContainer>   m_aggregatorToEdgeInterfaces6;
   std::vector <Ipv6InterfaceContainer>   m_edgeInterfaces6;
+  
+  std::vector <Ipv4AddressHelper> 
 
 };
 

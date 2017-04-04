@@ -102,6 +102,27 @@ PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
     }
 }
 
+void AssignIpv4Addresses (Ipv4AddressHelper coreToAggregatorIp,
+                          Ipv4AddressHelper aggregatorToEdgeIp)
+{
+  for(int i = 0; i < AggregateCount (); i++)
+  {
+    Ipv4InterfaceContainer aggregatorToEdgeInterfaces, edgeInterfaces;
+    for(int j = 0; j < AggregatorEdgeNodeCount(); j++)
+    {
+      NetDeviceContainer ndc;
+      ndc.Add (m_nAggregator.Get (i));
+      ndc.Add (m_crossSourceDevices[i].Get (j));
+      Ipv4InterfaceContainer ifc = aggregatorToEdgeIp.Assign (ndc);
+      aggregatorToEdgeInterfaces.Add (ifc.Get (0));
+      edgeInterfaces.Add (ifc.Get (0));
+      crossSourceIp.NewNetwork (ifc.Get (0));
+    }
+    m_aggregatorToEdgeInterfaces.push_back (aggregatorToEdgeInterfaces);
+    m_edgeInterfaces.push_back (edgeInterfacesss);
+  }
+}
+
   Ptr<Node> PointToPointFatTreeHelper::GetCore (uint32_t i) const
   {
     return m_nCoreGet (i);
@@ -142,7 +163,7 @@ PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
     return m_nAggregator.GetN ();
   }
 
-  uint32_t aggregatorEdgeNodeCount () const
+  uint32_t AggregatorEdgeNodeCount () const
   {
     return m_edge[0].GetN ();
   }
