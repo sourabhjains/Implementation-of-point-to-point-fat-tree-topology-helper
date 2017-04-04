@@ -89,6 +89,19 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
   {
   }
   
+void
+PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
+{
+  stack.Install (m_nCore);
+  stack.Install (m_nAggregator);
+
+  for (uint32_t i = 0; i < m.size (); ++i)
+    {
+      NodeContainer crossSourcesAtRouterI = m_edge[i];
+      stack.Install (crossSourcesAtRouterI);
+    }
+}
+
   Ptr<Node> PointToPointFatTreeHelper::GetCore (uint32_t i) const
   {
   

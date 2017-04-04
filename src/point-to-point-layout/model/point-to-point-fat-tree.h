@@ -56,6 +56,9 @@ public:
 
 public:
 
+
+  void PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
+
   Ptr<Node> GetCore (uint32_t i) const;
   
   Ptr<Node> GetAggregator (uint32_t i) const;
