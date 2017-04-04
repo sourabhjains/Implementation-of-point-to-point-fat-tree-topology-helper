@@ -62,13 +62,21 @@ public:
   
   Ptr<Node> GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const;
   
+  Ptr<NetDevice> GetCoreToAggregatorNetDevice (uint32_t coreIndex, uint32_t aggregatorIndex) const;
+  
+  Ptr<NetDevice> GetAggregatorToCoreNetDevice (uint32_t aggregatorIndex, uint32_t coreIndex) const;
+  
+  Ptr<NetDevice> GetAggregatorToEdgeNetDevice (uint32_t aggregatorIndex, uint32_t edgeIndex) const;
+  
+  Ptr<NetDevice> GetEdgeToAggregatorNetDevice (uint32_t edgeIndex, uint32_t aggregatorNodeIndex) const;
+  
   Ipv4Address GetCoreToAggregatorIpv4Address (uint32_t coreIndex, uint32_t aggregatorIndex) const;
   
-  Ipv4Address GetAggregatorToCoreIpv4Address (uint32_t aggregatorNodeIndex, uint32_t i) const;
+  Ipv4Address GetAggregatorToCoreIpv4Address (uint32_t aggregatorNodeIndex, uint32_t coreIndex) const;
   
   Ipv4Address GetAggregatorToEdgeIpv4Address (uint32_t aggregatorIndex, uint32_t edgeIndex) const;
   
-  Ipv4Address GetEdgeToAggregatorIpv4Address (uint32_t coreIndex, uint32_t aggregatorNodeIndex) const;
+  Ipv4Address GetEdgeToAggregatorIpv4Address (uint32_t edgeIndex, uint32_t aggregatorNodeIndex) const;
   
   uint32_t CoreCount () const;
   
@@ -88,7 +96,7 @@ public:
   std::vector <NetDeviceContainer>       m_coreToAggregatorDevices;
   std::vector <NetDeviceContainer>       m_aggregatorToCoreDevices;
   std::vector <NetDeviceContainer>       m_aggregatorToEdgeDevices;
-  std::vector <NetDeviceContainer>       m_edgeDevice;
+  std::vector <NetDeviceContainer>       m_edgeToAggregatorDevices;
   
   std::vector <Ipv4InterfaceContainer>   m_coreInterfaces;
   std::vector <Ipv4InterfaceContainer>   m_aggregatorToCoreInterfaces;

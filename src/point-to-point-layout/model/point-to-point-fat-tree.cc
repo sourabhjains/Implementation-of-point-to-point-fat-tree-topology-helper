@@ -59,7 +59,7 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
           edgeDevices.Add (c1.Get (1));
         }
         m_aggregatorToEdgeDevices.push_back (aggregatorDevices);
-        m_edgeDevice.push_back (edgeDevices);
+        m_edgeToAggregatorDevices.push_back (edgeDevices);
         m_edge.push_back(edgeNodes);
     }
     
@@ -113,7 +113,7 @@ void PointToPointFatTreeHelper::AssignIpv4Addresses (Ipv4AddressHelper coreToAgg
     {
       NetDeviceContainer ndc;
       ndc.Add (m_aggregatorToEdgeDevices[i].Get (i));
-      ndc.Add (m_edgeDevice[i].Get (j));
+      ndc.Add (m_edgeToAggregatorDevices[i].Get (j));
       Ipv4InterfaceContainer ifc = aggregatorToEdgeIp.Assign (ndc);
       aggregatorToEdgeInterfaces.Add (ifc.Get (0));
       edgeInterfaces.Add (ifc.Get (0));
@@ -166,6 +166,26 @@ void PointToPointFatTreeHelper::AssignIpv4Addresses (Ipv4AddressHelper coreToAgg
   Ptr<Node> PointToPointFatTreeHelper::GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const
   {
     return m_edge[aggregatorNodeIndex].Get (i);
+  }
+  
+  Ptr<NetDevice> PointToPointFatTreeHelper::GetCoreToAggregatorNetDevice (uint32_t coreIndex, uint32_t aggregatorIndex) const
+  {
+    return m_coreToAggregatorDevices[coreIndex].Get (aggregatorIndex);
+  }
+  
+  Ptr<NetDevice> PointToPointFatTreeHelper::GetAggregatorToCoreNetDevice (uint32_t aggregatorIndex, uint32_t coreIndex) const
+  {
+    return m_aggregatorToCoreDevices[aggregatorIndex].Get (coreIndex);
+  }
+  
+  Ptr<NetDevice> PointToPointFatTreeHelper::GetAggregatorToEdgeNetDevice (uint32_t aggregatorIndex, uint32_t edgeIndex) const
+  {
+    return m_aggregatorToEdgeDevices[aggregatorIndex].Get (edgeIndex);
+  }
+  
+  Ptr<NetDevice> PointToPointFatTreeHelper::GetEdgeToAggregatorNetDevice (uint32_t edgeIndex, uint32_t aggregatorIndex) const
+  {
+    return m_edgeToAggregatorDevices[edgeIndex].Get (aggregatorIndex);
   }
   
   Ipv4Address PointToPointFatTreeHelper::GetCoreToAggregatorIpv4Address (uint32_t coreIndex, uint32_t aggregatorIndex) const
