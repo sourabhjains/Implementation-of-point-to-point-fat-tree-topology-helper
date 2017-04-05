@@ -43,9 +43,14 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
                                                         PointToPointHelper coreAggregatorHelper,
                                                         PointToPointHelper aggregatorEdgeNodeHelper)
   {
+    // create n core nodes
     m_nCore.Create(nCore);
+    
+    // create n aggregator nodes
     m_nAggregator.Create(nAggregator);
 
+    // allocate n edge nodes to all aggregator nodes
+    // Install point-to-point link between aggregator and edge nodes  
     for(uint32_t i = 0; i < nAggregator; i++)
     {
         NodeContainer edgeNodes;
@@ -62,6 +67,7 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
         m_edgeToAggregatorDevices.push_back (edgeDevices);
         m_edge.push_back(edgeNodes);
     }
+
     
     for(uint32_t i = 0; i < nCore; i++)
     {
@@ -75,6 +81,7 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
       m_aggregatorToCoreDevices.push_back (aggregatorDevices);
     }
     
+    // Add the links core and aggregator nodes
     for(uint32_t i = 0; i < nCore; i++)
     {
       for(uint32_t j = 0; j < nAggregator; j++)
@@ -93,9 +100,11 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
 void
 PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
 {
+  // Install stack on core and aggregator nodes
   stack.Install (m_nCore);
   stack.Install (m_nAggregator);
-
+  
+  // Install stack on edge nodes
   for (uint32_t i = 0; i < m_edge.size (); ++i)
     {
       NodeContainer edgeI = m_edge[i];
@@ -106,6 +115,7 @@ PointToPointFatTreeHelper::InstallStack (InternetStackHelper stack)
 void PointToPointFatTreeHelper::AssignIpv4Addresses (Ipv4AddressHelper coreToAggregatorIp,
                                                      Ipv4AddressHelper aggregatorToEdgeIp)
 {
+  // Assign to core and aggregator nodes
   for(uint32_t i = 0; i < AggregatorCount (); i++)
   {
     Ipv4InterfaceContainer aggregatorToEdgeInterfaces, edgeInterfaces;
@@ -134,7 +144,8 @@ void PointToPointFatTreeHelper::AssignIpv4Addresses (Ipv4AddressHelper coreToAgg
     Ipv4InterfaceContainer aggregatorToCoreInterfaces;
     m_aggregatorToCoreInterfaces.push_back (aggregatorToCoreInterfaces);
   }
-  
+
+  // Assign to aggregator and core nodes
   for(uint32_t i = 0; i < CoreCount (); i++)
   {
     for(uint32_t j = 0; j < AggregatorCount (); j++)
@@ -163,7 +174,7 @@ void PointToPointFatTreeHelper::AssignIpv4Addresses (Ipv4AddressHelper coreToAgg
     return m_nAggregator.Get (i);
   }
   
-  Ptr<Node> PointToPointFatTreeHelper::GetEdgeNode (uint32_t aggregatorNodeIndex, uint32_t i) const
+  Ptr<Node> PointToPointFatTreeHelper::GetEdgeNode (uint32_t aggregatorIndex, uint32_t i) const
   {
     return m_edge[aggregatorNodeIndex].Get (i);
   }
