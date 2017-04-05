@@ -43,6 +43,7 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
                                                         PointToPointHelper coreAggregatorHelper,
                                                         PointToPointHelper aggregatorEdgeNodeHelper)
   {
+  std::cout << "Hello1" << std::endl;
     // create n core nodes
     m_nCore.Create(nCore);
     
@@ -91,6 +92,8 @@ NS_LOG_COMPONENT_DEFINE ("PointToPointFatTreeHelper");
         m_aggregatorToCoreDevices[j].Add (c1.Get (1));
       }
     }
+    
+    std::cout << "Hello1" << std::endl;
   }
   
   PointToPointFatTreeHelper::~PointToPointFatTreeHelper()
@@ -176,7 +179,7 @@ void PointToPointFatTreeHelper::AssignIpv4Addresses (Ipv4AddressHelper coreToAgg
   
   Ptr<Node> PointToPointFatTreeHelper::GetEdgeNode (uint32_t aggregatorIndex, uint32_t i) const
   {
-    return m_edge[aggregatorNodeIndex].Get (i);
+    return m_edge[aggregatorIndex].Get (i);
   }
   
   Ptr<NetDevice> PointToPointFatTreeHelper::GetCoreToAggregatorNetDevice (uint32_t coreIndex, uint32_t aggregatorIndex) const
